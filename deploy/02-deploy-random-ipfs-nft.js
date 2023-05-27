@@ -70,7 +70,7 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
         log("Verifying...")
         await verify(randomIpfsNft.address, args)
     }
-    log("--------------------------------------------")
+    log("---------------------------------------")
 }
 
 async function handleTokenUris() {
@@ -78,7 +78,9 @@ async function handleTokenUris() {
     const { responses: imageUploadResponses, files } = await storeImages(imagesLocation)
     for (imageUploadResponseIndex in imageUploadResponses) {
         let tokenUriMetadata = { ...metadataTemplate }
-        tokenUriMetadata.name = files[imageUploadResponseIndex].replace(".jpg", "")
+        let fullFileName = files[imageUploadResponseIndex]
+
+        tokenUriMetadata.name = fullFileName.substring(0, fullFileName.lastIndexOf("."))
         tokenUriMetadata.description = `Strong ${tokenUriMetadata.name} dog!`
         tokenUriMetadata.image = `ipfs://${imageUploadResponses[imageUploadResponseIndex].IpfsHash}`
         console.log(`Uploading ${tokenUriMetadata.name}...`)
