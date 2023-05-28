@@ -34,7 +34,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
 
     // NFT Variables
     uint256 public s_tokenCounter;
-    uint256 internal constant MAX_CHANCE_VALUE = 100;
+    uint256 internal constant MAX_CHANCE_VALUE = 60;
     string[] internal s_dogTokenUris;
     uint256 internal immutable i_mintFee;
     bool private s_isInitialized;
@@ -88,7 +88,7 @@ contract RandomIpfsNft is VRFConsumerBaseV2, ERC721URIStorage, Ownable {
     {
         address dogOwner = s_requestIdToSender[requestId];
         uint256 newTokenId = s_tokenCounter;
-        uint256 moddedRng = randomWords[0] % MAX_CHANCE_VALUE;
+        uint256 moddedRng = randomWords[0] % 100;
         Breed dogBreed = getBreedFromModdedRng(moddedRng);
         s_tokenCounter += 1;
 
