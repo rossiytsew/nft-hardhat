@@ -77,4 +77,24 @@ const { developmentChains } = require("../../helper-hardhat-config")
                 })
             })
         })
+
+        describe("getBreedFromModdedRng", async () => {
+            it("should return doberman if moddedRng < 10", async () => {
+                const expectedValue = await randomIpfsNft.getBreedFromModdedRng(9)
+                assert.equal(0, expectedValue)
+            })
+            it("should return rottweiler if moddedRng is between 10 - 39", async () => {
+                const expectedValue = await randomIpfsNft.getBreedFromModdedRng(39)
+                assert.equal(1, expectedValue)
+            })
+            it("should return shepherd if moddedRng is between 40 - 99", async () => {
+                const expectedValue = await randomIpfsNft.getBreedFromModdedRng(99)
+                assert.equal(2, expectedValue)
+            })
+            it("should revert if moddedRng > 99", async () => {
+                await expect(randomIpfsNft.getBreedFromModdedRng(100)).to.be.revertedWith(
+                    "RandomIpfsNft__RangeOutOfBounds"
+                )
+            })
+        })
     })
