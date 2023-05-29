@@ -13,3 +13,5 @@
     Users have to pay to mint NFT. The owner of the contract can withdraw the ETH.
 
 3. Dynamic SVG NFT
+    If price of ETH is above X -> thump up
+    If it is below -> thumb down
