@@ -67,7 +67,6 @@ module.exports = async function ({ getNamedAccounts, deployments }) {
     log("---------------------------------------")
 
     if (!developmentChains.includes(network.name) && process.env.ETHERSCAN_API_KEY) {
-        log("Verifying...")
         await verify(randomIpfsNft.address, args)
     } else {
         await vrfCoordinatorV2Mock.addConsumer(subscriptionId, randomIpfsNft.address)
